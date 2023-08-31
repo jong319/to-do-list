@@ -1,7 +1,11 @@
 # to-do-list
 Simple CLI To do list made in Rust
 
-Usage: cargo run <COMMAND>
+# install 
+$ cargo install --git https://github.com/jong319/to-do-list.git --branch main
+
+# usage 
+Usage: todo <COMMAND>
 
 Commands:
   list    lists all tasks
