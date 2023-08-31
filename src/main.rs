@@ -49,7 +49,7 @@ fn main() {
 fn build() -> Command {
     Command::new("To do list")
     .version("1.0.0")
-    .about("Simple Command Line Interface To do list")
+    .about("Simple CLI To do list")
     .subcommand_required(true)
     .arg_required_else_help(true)
     .subcommand(
