@@ -1,0 +1,3 @@
+false learn rust
+false apply rust
+false rust is fun
