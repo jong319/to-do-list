@@ -4,11 +4,7 @@ pub struct Todo {
     done: bool,
 }
 
-
-pub fn add(task: String) -> String{
-        let result = Todo {
-            task,
-            done: false,
-        };
-        format!("{} {}", result.done, result.task)
-    }
+pub fn add(task: String) -> String {
+    let result = Todo { task, done: false };
+    format!("{} {}\n", result.done, result.task)
+}
