@@ -29,6 +29,7 @@ fn main() {
             let results = add::add(task.get_one::<String>("TASK").unwrap().to_string());
             let mut writer = OpenOptions::new().create(true).append(true).open(file_path).unwrap();
             writer.write_all(results.as_bytes()).unwrap();
+            print!("{} successfully added\n", task.get_one::<String>("TASK").unwrap().as_str());
         }
         (UPDATE, index) => {
             let task = index.get_one::<String>("INDEX").expect("not an integer!").to_owned();
@@ -36,8 +37,13 @@ fn main() {
             let mut writer = OpenOptions::new().write(true).open(file_path).unwrap();
             //clear entire file and rewrite
             writer.set_len(0).unwrap();
-            writer.write_all(result.as_bytes()).unwrap();
+            writer.write_all(result.0.as_bytes()).unwrap();
+            print!("{}", result.1)
         },
+        (CLEAR, _) => {
+            let writer = OpenOptions::new().write(true).open(file_path).unwrap();
+            writer.set_len(0).unwrap();
+        }
         _ => unreachable!(),
     }
 
@@ -62,7 +68,7 @@ fn build() -> Command {
     .subcommand(Command::new(UPDATE).about("update progress of task")
         .arg(arg!(<INDEX>).required(true))
     )
-    .subcommand(Command::new(CLEAR))
+    .subcommand(Command::new(CLEAR).about("clears the entire list"))
 }
 
 fn file_path() -> String {
